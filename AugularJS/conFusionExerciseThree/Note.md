@@ -1,4 +1,4 @@
-# grunt的使用-important
+# grunt的使用
 
 # Exercise (Instructions): Web Tools: Grunt
 
