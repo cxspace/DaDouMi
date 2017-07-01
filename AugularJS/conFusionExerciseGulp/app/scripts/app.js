@@ -1,7 +1,10 @@
 'use strict';
 
 var app = angular.module('confusionApp',[]);
-app.controller('menuController', function() {
+app.controller('MenuController',['$scope', function($scope) {
+
+  $scope.showDetails = false;
+
   var dishes=[
                  {
                    name:'Uthapizza',
@@ -41,6 +44,9 @@ app.controller('menuController', function() {
                 }
                 ];
 
-    this.dishes = dishes;
+        $scope.dishes = dishes;
+        $scope.toggleDetails = function() {
+            $scope.showDetails = !$scope.showDetails;
+        };
 
-});
+}]);

@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="styles/mystyles-6955cb7e84.css"/>
 
-  <script src="scripts/app-9000c37841.js"></script>
+  <script src="scripts/app-b6606fbb81.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,14 +25,17 @@
 <body>
 
     <div class="container">
-          <div class="row row-content" ng-controller="menuController as menuCtrl">
+          <div class="row row-content" ng-controller="MenuController">
             <div class="col-xs-12">
 
-              <h1>菜单列表</h1>
+            <button ng-click="toggleDetails()" class="btn btn-xs btn-primary pull-right" type="button">
+              {{showDetails ? 'Hide Details':'Show Details'}}
+            </button>
+
               <div class="media-list">
 
               <ul>
-                    <li class="media" ng-repeat="dish in menuCtrl.dishes">
+                    <li class="media" ng-repeat="dish in dishes">
                     <div class="media-left media-middle">
                        <a href="#">
                        <img class="media-object img-thumbnail"
@@ -43,7 +46,7 @@
                        <h2 class="media-heading">{{dish.name}}
                          <span class="label label-danger">{{dish.label}}</span>
                          <span class="badge">{{dish.price | currency}}</span></h2>
-                         <p>{{dish.description}}</p>
+                        <p ng-show="showDetails">{{dish.description}}</p>
                     </div>
               </li>
 
