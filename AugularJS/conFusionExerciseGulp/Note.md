@@ -52,6 +52,36 @@ This will install local per-project Gulp to use within your project.
 
 - Install all the Gulp plugins that you will need for this exercise. To do this, type the following at the command prompt:
 
+```
+npm install jshint gulp-jshint jshint-stylish gulp-imagemin gulp-concat gulp-uglify gulp-minify-css gulp-usemin gulp-cache gulp-changed gulp-rev gulp-rename gulp-notify  browser-sync del --save-dev
+
+```
+
+### Creating a Gulp File
+
+- Next you need to create a Gulp file containing the tasks to be run when you use Gulp. To do this, create a file named gulpfile.js in the conFusion folder.
+
+### Loading Gulp Plugins
+
+- Load in all the Gulp plugins by including the following code in the Gulp file:
+
+```
+var gulp = require('gulp'),
+    minifycss = require('gulp-minify-css'),
+    jshint = require('gulp-jshint'),
+    stylish = require('jshint-stylish'),
+    uglify = require('gulp-uglify'),
+    usemin = require('gulp-usemin'),
+    imagemin = require('gulp-imagemin'),
+    rename = require('gulp-rename'),
+    concat = require('gulp-concat'),
+    notify = require('gulp-notify'),
+    cache = require('gulp-cache'),
+    changed = require('gulp-changed'),
+    rev = require('gulp-rev'),
+    browserSync = require('browser-sync'),
+    del = require('del');
+```
 
 ### Adding Gulp Tasks
 
