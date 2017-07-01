@@ -43,7 +43,10 @@ This will install the Gulp globally so that you can use it in all projects.
 - Next install Gulp to use within your project. To do this, go to the *conFusion* folder and type the following at the prompt:
 
 ```
+
 npm install gulp --save-dev
+npm install gulp-ng-annotate --save-dev
+
 ```
 
 This will install local per-project Gulp to use within your project.
@@ -81,6 +84,9 @@ var gulp = require('gulp'),
     rev = require('gulp-rev'),
     browserSync = require('browser-sync'),
     del = require('del');
+
+var ngannotate = require('gulp-ng-annotate');
+
 ```
 
 ### Adding Gulp Tasks
@@ -109,11 +115,12 @@ gulp.task('default', ['clean'], function() {
 - Next, paste in the code for the usemin, imagemin and copyfonts tasks:
 
 ```
+
 gulp.task('usemin',['jshint'], function () {
   return gulp.src('./app/menu.html')
       .pipe(usemin({
         css:[minifycss(),rev()],
-        js: [uglify(),rev()]
+        js: [ngannotate(),uglify(),rev()]
       }))
       .pipe(gulp.dest('dist/'));
 });
@@ -132,6 +139,7 @@ gulp.task('copyfonts', ['clean'], function() {
    gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
    .pipe(gulp.dest('./dist/fonts'));
 });
+
 ```
 
 - Finally, we add the code for the watch and browserSync tasks:
