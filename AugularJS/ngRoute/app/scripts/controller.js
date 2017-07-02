@@ -3,7 +3,9 @@
  */
 'use strict';
 
-angular.module('confusionApp').controller('MenuController',['$scope', 'menuFactory',function($scope,menuFactory) {
+angular.module('confusionApp')
+
+ .controller('MenuController',['$scope', 'menuFactory',function($scope,menuFactory) {
 
 
     $scope.tab = 1;
@@ -14,19 +16,25 @@ angular.module('confusionApp').controller('MenuController',['$scope', 'menuFacto
     $scope.select = function(setTab) {
         $scope.tab = setTab;
         if (setTab === 2)
+        {
             $scope.filtText = "appetizer";
+        }
         else if (setTab === 3)
+        {
             $scope.filtText = "mains";
+        }
         else if (setTab === 4)
+        {
             $scope.filtText = "dessert";
-        else
-            $scope.filtText = "";
+        }
+        else{
+            $scope.filtText = "";}
 
-    }
+    };
 
     $scope.isSelected = function (checkTab) {
         return (this.tab === checkTab);
-    }
+    };
 
     $scope.toggleDetails = function() {
         $scope.showDetails = !$scope.showDetails;
@@ -41,6 +49,13 @@ angular.module('confusionApp').controller('MenuController',['$scope', 'menuFacto
     var channels = [{value:"tel", label:"Tel."}, {value:"Email",label:"Email"}];
     $scope.channels = channels;
     $scope.invalidChannelSelection = false;
+
+}])
+
+.controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory', function($scope, $routeParams, menuFactory) {
+
+        var dish= menuFactory.getDish(parseInt($routeParams.id,10));
+        $scope.dish = dish;
 
 }])
 
