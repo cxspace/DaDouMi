@@ -6,7 +6,12 @@
           Back to Menu
      </button>
 
-     <div class="media-list">
+     <div class="col-xs-12" ng-if="!showDish">
+          <h3>{{message}}</h3>
+     </div>
+
+
+     <div class="media-list" ng-if="showDish">
 
           <ul>
                <li class="media">
