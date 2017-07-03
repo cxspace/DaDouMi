@@ -31,7 +31,9 @@
 <body>
 
 <div ui-view="header"></div>
-<div ui-view="content"></div>
+
+<div ui-view="content" ng-controller="IndexController"></div>
+
 <div ui-view="footer"></div>
 
 
@@ -44,7 +46,6 @@
 
 <script src="scripts/controller.js"></script>
 <script src="scripts/service.js"></script>
-
 
 <!-- endbuild -->
 
