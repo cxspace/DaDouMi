@@ -1,0 +1,43 @@
+
+<div class="row row-content" ng-controller="DishDetailController">
+
+     <button class="btn btn-xs btn-primary pull-right"
+             type="button" ui-sref="app.menu">
+          Back to Menu
+     </button>
+
+     <div class="media-list">
+
+          <ul>
+               <li class="media">
+                    <div class="media-left media-middle">
+                         <a>
+                              <img class="media-object img-thumbnail"
+                                   ng-src={{dish.image}} alt="Uthappizza">
+                         </a>
+                    </div>
+                    <div class="media-body">
+                         <h2 class="media-heading">{{dish.name}}
+                              <span class="label label-danger">{{dish.label}}</span>
+                              <span class="badge">{{dish.price | currency}}</span></h2>
+                    </div>
+               </li>
+
+               <li class="media">
+                    <blockquote>
+                         <p>{{dish.description}}</p>
+                    </blockquote>
+               </li>
+
+          </ul>
+
+
+
+
+
+
+     </div>
+
+
+
+</div>
