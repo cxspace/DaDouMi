@@ -1,5 +1,5 @@
 {
-  "name": "ngRoute",
+  "name": "RESTfulService",
   "private": true,
   "devDependencies": {
     "grunt": "^1.0.1",

@@ -15,28 +15,17 @@ angular.module('confusionApp')
      $scope.showMenu = false;
      $scope.message = "Loading ...";
 
-     $scope.dishes= [];
-     menuFactory.getDishes()
-         .then(
-             
-             //OK handler
-             function(response) {
-                 $scope.dishes = response.data;
-                 $scope.showMenu = true;
+     $scope.dishes= menuFactory.getDishes().query(
+         function(response) {
+             $scope.dishes = response;
+             $scope.showMenu = true;
+         },
+         function(response) {
+             $scope.message = "Error: "+response.status + " " + response.statusText;
+         }
+     );
 
-             },
-             
-             //error handler
-             function (response) {
-                 //error tip
-
-                 $scope.message = "Error: "+response.status + " " + response.statusText;
-
-             }
-             
-             );
-
-    $scope.select = function(setTab) {
+     $scope.select = function(setTab) {
         $scope.tab = setTab;
         if (setTab === 2)
         {
@@ -83,6 +72,10 @@ angular.module('confusionApp')
 
 .controller('IndexController', ['$scope', function($scope) {
 
+    // $scope.showDish = true;
+    // $scope.message="Loading ...";
+    // $scope.dish = menuFactory.getDishes().get({id:0});
+
 }])
 
 .controller('ContactController', ['$scope', function($scope) {
@@ -97,21 +90,20 @@ angular.module('confusionApp')
 
 .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
 
-        $scope.dish = {};
-        $scope.showDish = false;
+        $scope.showDish = true;
         $scope.message="Loading ...";
+        $scope.dish =  menuFactory.getDishes().get({id:parseInt($stateParams.id,10)}).$promise.then(
 
-       menuFactory.getDish(parseInt($stateParams.id,10))
-        .then(
             function(response){
-                $scope.dish = response.data;
+                $scope.dish = response;
                 $scope.showDish = true;
-
             },
             function(response) {
                 $scope.message = "Error: "+response.status + " " + response.statusText;
             }
+
         );
+
 
 }])
 

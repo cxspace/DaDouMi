@@ -1,5 +1,5 @@
 {
-  "name": "ngRoute",
+  "name": "RESTfulService",
   "version": "1.0.0",
   "description": "Website for an awesome restaurant",
   "main": "index.html",
@@ -24,9 +24,9 @@
   "dependencies": {
     "bootstrap": "~3.3.5",
     "font-awesome": "~4.4.0",
-    "angular": "~1.2.7",
-    "angular-route": "~1.2.7",
-    "angular-resource": "~1.2.7",
-    "angular-ui-router": "^1.0.5"
+    "angular": "~1.6.1",
+    "angular-route": "~1.6.1",
+    "angular-resource": "~1.6.1",
+    "angular-ui-router": "~1.0.4"
   }
 }

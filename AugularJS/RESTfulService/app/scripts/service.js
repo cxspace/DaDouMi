@@ -3,9 +3,9 @@
  */
 'use strict';
 
-angular.module('confusionApp').constant("baseURL"," http://localhost:3000")
+angular.module('confusionApp').constant("baseURL"," http://localhost:3000/")
 
-    .service('menuFactory',[ '$http', 'baseURL', function ($http,baseURL) {
+    .service('menuFactory',[ '$resource', 'baseURL', function ($resource,baseURL) {
 
 
     // var dishes=[
@@ -51,11 +51,15 @@ angular.module('confusionApp').constant("baseURL"," http://localhost:3000")
     //     }
     // ];
 
+    console.log("GET DISHES");
+
     this.getDishes = function(){
-        return $http.get(baseURL+"/dishes");
+        return $resource(baseURL+"dishes/:id",null,  {'update':{method:'PUT' }});
     };
-    this.getDish = function (index) {
-        return $http.get(baseURL+"/dishes/"+index);
-    };
+
+
+    // this.getDish = function (index) {
+    //     return $http.get(baseURL+"/dishes/"+index);
+    // };
 
 }]);
