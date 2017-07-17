@@ -15,7 +15,7 @@ angular.module('confusionApp',['ngRoute'])
             })
             // route for the menu page
             .when('/menu', {
-                templateUrl : 'menu.html',
+                templateUrl : 'sidebar.html',
                 controller  : 'MenuController'
             })
             // route for the dish details page

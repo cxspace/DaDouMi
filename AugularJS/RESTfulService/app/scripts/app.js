@@ -52,7 +52,7 @@ angular.module('confusionApp',['ui.router','ngResource'])
                 url: 'menu',
                 views: {
                     'content@': {
-                        templateUrl : 'views/menu.html',
+                        templateUrl : 'views/sidebar.html',
                         controller  : 'MenuController'
                     }
                 }

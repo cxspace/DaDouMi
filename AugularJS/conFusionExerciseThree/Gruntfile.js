@@ -38,7 +38,7 @@ jshint: {
 
 useminPrepare:{
 
-  html:'app/menu.html',
+  html:'app/sidebar.html',
   options:{
     dist:'dist'
   }
