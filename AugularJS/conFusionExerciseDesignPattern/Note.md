@@ -60,11 +60,11 @@ angular.module('confusionApp', []);
 # important !!!!!
 
 ```
-app.js reference must write before controller.js and service.js  
+app.js reference must write before controller.js and services.js  
 
 <script src="scripts/app.js"></script>
 <script src="scripts/controller.js"></script>
-<script src="scripts/service.js"></script>
+<script src="scripts/services.js"></script>
 ```
 
 - Open services.js and add the following code:
