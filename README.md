@@ -1,5 +1,19 @@
 # AngularJS
- video url : https://www.youtube.com/watch?v=oRHPmkvED2E&list=PLYxzS__5yYQmX2bItSRCqwiQZn5dIL1gt
 
- # tutorial url
- https://www.tutorialspoint.com/angularjs/index.htm
+- course
+
+https://www.coursera.org/learn/angular-js/home/welcome
+
+- tutorial url
+
+https://www.tutorialspoint.com/angularjs/index.htm
+
+# Ionic
+
+- course
+
+https://www.coursera.org/learn/hybrid-mobile-development/home/welcome
+
+- tutorial url
+
+https://www.tutorialspoint.com/ionic/index.htm
