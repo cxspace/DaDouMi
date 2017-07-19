@@ -442,3 +442,114 @@ In this exercise you will use resolve in ui-router to simplify the code within y
 ### Conclusions
 
 In this exercise, you updated the app to use the resolve in ui-router to simplify the controllers.
+
+# Exercise (Instructions): Displaying Loading Message During State Transition
+
+### Objectives and Outcomes
+
+In this exercise you will learn to make use of the support for events in Angular to trigger the showing and hiding of a loading message in your application. At the end of this exercise, you will be able to:
+
+- Use $rootScope to create a mechanism to display and hide loading message
+- Use the ui-router events to show and hide the loading message
+
+### Updating the run method in app.js
+
+- Open app.js and update the run method as follows:
+
+```
+.run(function($ionicPlatform, $rootScope, $ionicLoading) {
+```
+
+- Then, add the following code to the end of the run method:
+
+```
+$rootScope.$on('loading:show', function () {
+        $ionicLoading.show({
+            template: '<ion-spinner></ion-spinner> Loading ...'
+        })
+    });
+
+    $rootScope.$on('loading:hide', function () {
+        $ionicLoading.hide();
+    });
+
+    $rootScope.$on('$stateChangeStart', function () {
+        console.log('Loading ...');
+        $rootScope.$broadcast('loading:show');
+    });
+
+    $rootScope.$on('$stateChangeSuccess', function () {
+        console.log('done');
+        $rootScope.$broadcast('loading:hide');
+    });
+```
+
+- Save the changes and examine the application.
+
+### Conclusions
+
+In this exercise, you have learnt about watching for events and triggering some action in response to the events.
+
+# Exercise (Instructions): Using Local Storage
+
+### Objectives and Outcomes
+
+In this exercise, you will learn about HTML5 local storage and how you can leverage this to support the storing of information in your app in local storage. At the end of this exercise, you will be able to:
+
+- Design a new Angular service using local storage
+- Make use of the Local Storage to remember user information
+
+### Adding $localStorage Service
+
+- Open *services.js* and add the following $localStorage service code to it:
+
+```
+.factory('$localStorage', ['$window', function($window) {
+  return {
+    store: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    storeObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key,defaultValue) {
+      return JSON.parse($window.localStorage[key] || defaultValue);
+    }
+  }
+}])
+```
+
+### Updating AppCtrl
+
+- Open *controllers.js* and update the AppCtrl controller as follows to inject $localStorage:
+
+```
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage) {
+```
+
+- Then update the initialization of loginData JavaScript object as follows:
+
+```
+    $scope.loginData = $localStorage.getObject('userinfo','{}');
+```
+
+- Finally, within the doLogin() function in AppCtrl, update it as follows:
+
+```
+    $scope.doLogin = function () {
+        console.log('Doing login', $scope.loginData);
+        $localStorage.storeObject('userinfo',$scope.loginData);
+
+        . . .
+
+     };
+```
+
+- Save the changes and check the updated application.
+
+### Conclusions
+
+In this exercise, you learnt to make use of the HTML5 local storage within your application, first by creating a service to wrap the local storage, and then inject into a controller in order to use the storage.
