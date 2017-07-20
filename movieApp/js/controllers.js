@@ -41,3 +41,7 @@ angular.module('movieApp.controllers',[]).controller('MovieListController',funct
 
     $scope.loadMovie();
 });
+
+
+
+
