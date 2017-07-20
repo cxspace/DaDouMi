@@ -553,3 +553,318 @@ In this exercise, you will learn about HTML5 local storage and how you can lever
 ### Conclusions
 
 In this exercise, you learnt to make use of the HTML5 local storage within your application, first by creating a service to wrap the local storage, and then inject into a controller in order to use the storage.
+
+# Exercise (Instructions): Customizing and Controlling the Splash Screen
+
+### Exercise Resources
+
+# Exercise (Instructions): Customizing and Controlling the Splash Screen
+
+### Exercise Resources
+
+https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_9da018ec6a67a243cf9992e57f0f6012_icon.png?expiry=1500595200000&hmac=QjBSm0El0Ots6VqJ3ylFQTQ8WYDzS_NYcR76zko3Mq4
+
+https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_9da018ec6a67a243cf9992e57f0f6012_splash.png?expiry=1500595200000&hmac=0KH8YEoRqC7mwBj2sIMsZ2L1TwStlaZw7BrOz5dtdQk
+
+### Objectives and Outcomes
+
+In this exercise you will learn how to customize the splash screen and also control the duration of its display on the screen. To do this, you will make use of Cordova through the ngCordova splash screen support. At the end of this exercise, you will be able to:
+
+- Customize the splash screen of an Ionic application
+- Control the display of the splash screen through the Cordova plugin support
+
+### Customizing the Splash Screen
+
+- Download the icon.png and splash.png files provided above and move them to the *conFusion/resources* folder.
+- At the command prompt, type the following to prepare the icon and splash screen images for different screen resolutions and densities:
+
+```
+     ionic resources
+```
+
+- You can rebuild and deploy your application to the emulator or a device to observe the new splashscreen.
+
+### Updating config.xml
+
+- Open *config.xml* file in the conFusion folder and update it by adding a new line to the preferences as follows:
+
+```
+  <preference name="AutoHideSplashScreen" value="false" />
+```
+
+### Updating app.js to Dismiss the Splash Screen
+
+- Open *app.js* and update the angular module by injecting *ngCordova* as follows:
+
+```
+angular.module('conFusion', ['ionic', 'ngCordova', 'conFusion.controllers','conFusion.services'])
+```
+
+- Then update the run method by injecting *$cordovaSplashscreen* and *$timeout *as follows:
+
+```
+.run(function($ionicPlatform, $rootScope, $ionicLoading, $cordovaSplashscreen, $timeout) {
+```
+
+- Then, inside the $ionicPlatform.ready() function, add the following code:
+
+```
+      $timeout(function(){
+                $cordovaSplashscreen.hide();
+      },20000);
+```
+
+### Updating index.html
+
+- Open *index.html *and add the following line to the file to import *ng-cordova.js* file:
+
+```
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+```
+
+Make sure this line is between where you import *ionic.bundle.js* and *cordova.js*
+
+- Save the changes and then switch to your terminal.
+
+### Installing ngCordova
+
+- At the terminal prompt, making sure you are in the *conFusion* folder, type the following to install *ngCordova*:
+
+```
+     bower install ngCordova --save
+```
+
+- Then, build the app and deploy it to the emulator or a device.
+
+### Conclusions
+
+In this exercise, you learnt the use of your first ngCordova and Cordova plugin in order to customize and control the splash screen.
+
+# Exercise (Instructions): Notifying the User
+
+### Objectives and Outcomes
+
+In this exercise, you will use two different Cordova plugins for delivering notification to the user. You will use the local notification plugin to put a notification into the device's notification bar. In addition you will use the toast plugin to show a short message on the screen to alert the user. At the end of this exercise, you will be able to:
+
+- Use the Cordova Local Notification plugin together with the ngCordova wrapper to put notifications into the device's notification bar
+- Use the Cordova Toast plugin together with the ngCordova wrapper to show a short message to the user on the device's screen
+
+### Adding the Cordova Plugins
+
+- First, add the Cordova plugin for the local notifications by typing the following at the command prompt:
+
+```
+     ionic plugin add de.appplant.cordova.plugin.local-notification
+```
+
+- Then, install the Cordova Toast plugin by typing the following at the prompt:
+
+```
+     ionic plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
+```
+
+### Updating MenuController
+
+- Update the *MenuController* to inject the *$ionicPlatform, $cordovaLocalNotification* and *$cordovaToast* as follows:
+
+```
+.controller('MenuController', ['$scope', 'dishes', 'favoriteFactory', 'baseURL', '$ionicListDelegate', '$ionicPlatform', '$cordovaLocalNotification', '$cordovaToast', function ($scope, dishes, favoriteFactory, baseURL, $ionicListDelegate, $ionicPlatform, $cordovaLocalNotification, $cordovaToast) {
+```
+
+- Then add the following to the *addFavorite()* function in *MenuController*:
+
+```
+        $ionicPlatform.ready(function () {
+                $cordovaLocalNotification.schedule({
+                    id: 1,
+                    title: "Added Favorite",
+                    text: $scope.dishes[index].name
+                }).then(function () {
+                    console.log('Added Favorite '+$scope.dishes[index].name);
+                },
+                function () {
+                    console.log('Failed to add Notification ');
+                });
+
+                $cordovaToast
+                  .show('Added Favorite '+$scope.dishes[index].name, 'long', 'center')
+                  .then(function (success) {
+                      // success
+                  }, function (error) {
+                      // error
+                  });
+        });
+
+```
+
+- Save the changes, build and deploy the application to the emulator to see the changes.
+
+### Conclusions
+
+In this exercise, you learnt to use the Cordova local notifications and toast plugins to notify the user.
+
+# Exercise (Instructions): Using the Camera Plugin
+
+### Objectives and Outcomes
+
+In this exercise, you will continue exploring more Cordova plugins. In particular, you will use the Cordova camera plugin to access the device's built-in camera to retrieve image data and use it within your application. At the end of this exercise, you will be able to:
+
+- Use the Cordova camera plugin together with the ngCordova wrapper to access the device's native camera to retrieve image data
+- Make use of the image data within your application
+
+### Adding the Cordova Camera Plugin
+
+- First, add the Cordova camera plugin by typing the following at the command prompt:
+
+```
+     ionic plugin add cordova-plugin-camera
+```
+
+- Or use the following command at the command prompt, if your Cordova version is below 5.0:
+
+```
+     ionic plugin add org.apache.cordova.camera
+```
+
+### Updating sidebar.html
+
+- Add the following additional list item to the sidebar menu in *sidebar.html*:
+
+```
+        <ion-item menu-close ng-click="register()">
+          Register
+        </ion-item>
+```
+
+### Updating AppCtrl Controller
+
+- Open controllers.js and update the AppCtrl controller definition as follows:
+
+```
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $localStorage, $ionicPlatform, $cordovaCamera) {
+```
+
+- Then add in an empty JavaScript variable named *registration* as follows:
+
+```
+    $scope.registration = {};
+```
+
+- Then add the code to set up the registration modal as follows:
+
+```
+ // Create the registration modal that we will use later
+    $ionicModal.fromTemplateUrl('templates/register.html', {
+        scope: $scope
+    }).then(function (modal) {
+        $scope.registerform = modal;
+    });
+
+    // Triggered in the registration modal to close it
+    $scope.closeRegister = function () {
+        $scope.registerform.hide();
+    };
+
+    // Open the registration modal
+    $scope.register = function () {
+        $scope.registerform.show();
+    };
+
+    // Perform the registration action when the user submits the registration form
+    $scope.doRegister = function () {
+        // Simulate a registration delay. Remove this and replace with your registration
+        // code if using a registration system
+        $timeout(function () {
+            $scope.closeRegister();
+        }, 1000);
+    };
+```
+
+- Add the following code to AppCtrl to make use of the Cordova camera plugin within our application:
+
+```
+$ionicPlatform.ready(function() {
+        var options = {
+            quality: 50,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 100,
+            targetHeight: 100,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+         $scope.takePicture = function() {
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                $scope.registration.imgSrc = "data:image/jpeg;base64," + imageData;
+            }, function(err) {
+                console.log(err);
+            });
+
+            $scope.registerform.show();
+
+        };
+    });
+```
+
+### Add the register.html Template
+
+- In the *templates* folder, create a new file named *register.html,* and add the following code to it:
+
+```
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Register</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeRegister()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doRegister()">
+      <div class="list">
+       <label class="item item-input">
+       <span class="input-label">Your Picture</span>
+       </label>
+       <label class="item item-input">
+       <img class="padding" ng-src="{{registration.imgSrc}}">
+       </label>
+       <label class="item item-input">
+       <button class="button button-block button-positive" type="button" ng-click="takePicture()">
+            Take Picture
+        </button>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" ng-model="registration.firstname">
+        </label>
+         <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" ng-model="registration.lastname">
+        </label>
+         <label class="item item-input">
+          <span class="input-label">Username</span>
+          <input type="text" ng-model="registration.username">
+        </label>
+       <label class="item item-input">
+          <span class="input-label">Telephone Number</span>
+          <input type="tel" ng-model="registration.telnum">
+        </label>
+       <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="registration.email">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Register</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
+```
+
+- Save the changes, build and deploy the application and see the changes.
+
+### Conclusions
+
+In this exercise, you learnt to use the Cordova camera plugin within your application to retrieve image data from the device's camera.
