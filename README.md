@@ -1,19 +1,3 @@
-# AngularJS
+# 全栈学习地址
 
-- course
-
-https://www.coursera.org/learn/angular-js/home/welcome
-
-- tutorial url
-
-https://www.tutorialspoint.com/angularjs/index.htm
-
-# Ionic
-
-- course
-
-https://www.coursera.org/learn/hybrid-mobile-development/home/welcome
-
-- tutorial url
-
-https://www.tutorialspoint.com/ionic/index.htm
+https://www.coursera.org/specializations/full-stack
