@@ -86,7 +86,13 @@ dishRouter.route('/:dishId/comments')
     });
 })
 
+
 .post(Verify.verifyOrdinaryUser , function (req, res, next) {
+
+    /**
+     * 通过DishId找到对应dish，通过用户id定位那个用户发布的评论，存储到到对应的dish
+     */
+
     Dishes.findById(req.params.dishId, function (err, dish) {
         if (err) next(err);
         req.body.postedBy = req.decoded._id;
@@ -98,6 +104,7 @@ dishRouter.route('/:dishId/comments')
         });
     });
 })
+
 
 .delete(Verify.verifyOrdinaryUser , function (req, res, next) {
     Dishes.findById(req.params.dishId, function (err, dish) {

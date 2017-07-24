@@ -31,10 +31,58 @@
 
      </div>
 
+<!--      <div class="card">
+
+
+           <form id="commentForm" name="commentForm" ng-submit="submitComment()">
+            <div class="list">
+              <label class="item item-input item-select">
+                <span class="input-label">Rating</span>
+                  <select ng-model="mycomment.rating">
+                      <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
+                  </select>
+              </label>
+              </li>
+              <label class="item item-input">
+                <span class="input-label">Your Comment</span>
+                <textarea type="text" ng-model="mycomment.comment"></textarea>
+              </label>
+              <label class="item">
+                <button class="button button-block button-positive" type="submit">Submit</button>
+              </label>
+            </div>
+          </form>
+
+     </div> -->
+
+
+
     <div class="row">
-      <div class="col col-offset-10">
+      <div class="col">
+
+
+        <form id="commentForm" name="commentForm" ng-submit="submitComment()">
+            <div class="list">
+              <label class="item item-input item-select">
+                <span class="input-label">Rating</span>
+                  <select ng-model="mycomment.rating">
+                      <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
+                  </select>
+              </label>
+              </li>
+              <label class="item item-input">
+                <span class="input-label">Your Comment</span>
+                <textarea type="text" ng-model="mycomment.comment"></textarea>
+              </label>
+              <label class="item">
+                <button class="button button-block button-positive" type="submit">Submit</button>
+              </label>
+            </div>
+          </form>
 
         <h4>Customer Comments &nbsp;&nbsp;&nbsp;
+
+
 
         <small>
         Sort by: &nbsp;
@@ -43,6 +91,9 @@
 
         </small>
         </h4>
+
+
+
 
         <ul class="list">
 
@@ -53,8 +104,8 @@
               <p>{{comment.rating}} Stars</p>
               <p>{{comment.comment}}</p>
               <footer>
-                {{comment.author}},
-                {{comment.date | date:'MMM. dd, yyyy'}}
+                {{comment.postedBy.username}},
+                {{comment.createdAt | date:'MM. dd, yyyy'}}
               </footer>
 
             </blockquote>
@@ -66,6 +117,8 @@
       </div>
 
     </div>
+
+
 
   </ion-content>
 </ion-view>

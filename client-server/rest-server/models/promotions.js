@@ -4,6 +4,8 @@ var Schema = mongoose.Schema;
 require('mongoose-currency').loadType(mongoose);
 var Currency = mongoose.Types.Currency;
 
+//定义促销产品的shcema
+
 var promotionSchema = new Schema({
     name: {
         type: String,
@@ -36,6 +38,7 @@ var promotionSchema = new Schema({
 });
 
 
+//导出Model供外部使用
 var promotions = mongoose.model('promotion', promotionSchema);
 
 module.exports = promotions;

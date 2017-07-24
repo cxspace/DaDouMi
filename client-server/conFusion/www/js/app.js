@@ -110,6 +110,16 @@ angular.module('conFusion', ['ionic','ngCordova', 'conFusion.controllers','conFu
       }
     })
 
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        'mainContent': {
+          templateUrl: 'templates/profile.html',
+          controller: 'ProfileController'
+        }
+      }
+    })
+
   .state('app.dishdetails', {
     url: '/menu/:id',
     cache:false,

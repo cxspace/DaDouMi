@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
 var User = require('./user');
+var Schema = mongoose.Schema;
 
 
 require('mongoose-currency').loadType(mongoose);
 
 var Currency = mongoose.Types.Currency;
 
+//定义评论的Schema
 var commentSchema = new Schema({
     rating:  {
         type: Number,
@@ -18,14 +19,21 @@ var commentSchema = new Schema({
         type: String,
         required: true
     },
+
+    //关联到发布评论的User
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 
 }, {
+
+    //需要时间戳记录操作
     timestamps: true
 });
+
+
+//定义食物的Schema
 
 var dishSchema = new Schema({
     name: {
@@ -57,11 +65,14 @@ var dishSchema = new Schema({
     description: {
         type: String,
     },   
+
+    // 评论作为子项目存储
     comments:[commentSchema]
 }, {
     timestamps: true
 });
 
+//将Dishes Model导出
 var Dishes = mongoose.model('Dish', dishSchema);
 
 module.exports = Dishes;

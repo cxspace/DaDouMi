@@ -2,7 +2,7 @@
 
 angular.module('conFusion.services',['ngResource'])
 
-  .constant("baseURL","http://127.0.0.1:3000/")
+  .constant("baseURL","http://121.42.184.102:3000/")
 
   .factory('menuFactory', ['$resource', 'baseURL', function($resource,baseURL) {
 
@@ -32,7 +32,7 @@ angular.module('conFusion.services',['ngResource'])
 
 
   .factory('corporateFactory', ['$resource', 'baseURL', function($resource,baseURL) {
-   
+
    return $resource(baseURL + "leadership/:id", null,  {
                 'update': {
                     method: 'PUT'
@@ -56,10 +56,6 @@ angular.module('conFusion.services',['ngResource'])
             'update': {
                 method: 'PUT'
             }
-            // ,
-            // 'query':{
-            //     method:'GET' , isArray:false
-            // }
         });
   }])
 
@@ -84,8 +80,8 @@ angular.module('conFusion.services',['ngResource'])
 }])
 
 
-.factory('AuthFactory', ['$resource', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', function($resource, $http, $localStorage, $rootScope, baseURL, $ionicPopup){
-    
+.factory('AuthFactory', ['$resource','$state', '$http', '$localStorage', '$rootScope', 'baseURL', '$ionicPopup', function($resource,$state, $http, $localStorage, $rootScope, baseURL, $ionicPopup){
+
     var authFac = {};
     var TOKEN_KEY = 'Token';
     var isAuthenticated = false;
@@ -98,21 +94,21 @@ angular.module('conFusion.services',['ngResource'])
       useCredentials(credentials);
     }
   }
- 
+
   function storeUserCredentials(credentials) {
     $localStorage.storeObject(TOKEN_KEY, credentials);
     useCredentials(credentials);
   }
- 
+
   function useCredentials(credentials) {
     isAuthenticated = true;
     username = credentials.username;
     authToken = credentials.token;
- 
+
     // Set the token as header for your requests!
     $http.defaults.headers.common['x-access-token'] = authToken;
   }
- 
+
   function destroyUserCredentials() {
     authToken = undefined;
     username = '';
@@ -120,9 +116,9 @@ angular.module('conFusion.services',['ngResource'])
     $http.defaults.headers.common['x-access-token'] = authToken;
     $localStorage.remove(TOKEN_KEY);
   }
-     
+
     authFac.login = function(loginData) {
-        
+
         $resource(baseURL + "users/login")
         .save(loginData,
            function(response) {
@@ -130,74 +126,53 @@ angular.module('conFusion.services',['ngResource'])
               $rootScope.$broadcast('login:Successful');
            },
            function(response){
-              isAuthenticated = false;
-            
-              var message = '<div><p>' +  response.data.err.message + 
-                  '</p><p>' + response.data.err.name + '</p></div>';
-            
-               var alertPopup = $ionicPopup.alert({
-                    title: '<h4>Login Failed!</h4>',
-                    template: message
-                });
 
-                alertPopup.then(function(res) {
-                    console.log('Login Failed!');
-                });
+              // $state.go("app.profile", {}, {reload: true});
+
            }
-        
+
         );
 
     };
-    
+
     authFac.logout = function() {
         $resource(baseURL + "users/logout").get(function(response){
         });
         destroyUserCredentials();
     };
-    
+
     authFac.register = function(registerData) {
-        
+
         $resource(baseURL + "users/register")
         .save(registerData,
            function(response) {
               authFac.login({username:registerData.username, password:registerData.password});
-            
+
               $rootScope.$broadcast('registration:Successful');
            },
            function(response){
-            
-              var message = '<div><p>' +  response.data.err.message + 
-                  '</p><p>' + response.data.err.name + '</p></div>';
-            
-               var alertPopup = $ionicPopup.alert({
-                    title: '<h4>Registration Failed!</h4>',
-                    template: message
-                });
 
-                alertPopup.then(function(res) {
-                    console.log('Registration Failed!');
-                });
            }
-        
+
         );
     };
-    
+
     authFac.isAuthenticated = function() {
         return isAuthenticated;
     };
-    
+
     authFac.getUsername = function() {
-        return username;  
+        return username;
     };
-    
+
     authFac.facebook = function() {
-        
+
     };
-    
+
     loadUserCredentials();
-    
+
     return authFac;
-    
+
 }])
 
 

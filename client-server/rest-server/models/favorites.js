@@ -7,6 +7,9 @@ var Dish = require('./dishes');
 var User = require('./user');
 var Schema = mongoose.Schema;
 
+//关联某个用户最喜欢的食物的Schema
+// 食物的Id加上添加喜爱的用户的Id
+
 var favoriteSchema = new Schema({
     dishes: [
         {
@@ -21,6 +24,7 @@ var favoriteSchema = new Schema({
     timestamps: true
 });
 
+//导出Schema供外部使用
 var Favorites = mongoose.model('Favorites', favoriteSchema);
 
 module.exports = Favorites;

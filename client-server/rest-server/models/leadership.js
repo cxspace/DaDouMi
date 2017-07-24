@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+//定义领导的Schema
 var leadershipSchema = new Schema({
     name: {
         type: String,
@@ -32,6 +33,7 @@ var leadershipSchema = new Schema({
 });
 
 
+//导出供外部使用
 var leaderships = mongoose.model('leadership', leadershipSchema);
 
 module.exports = leaderships;

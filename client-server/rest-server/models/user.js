@@ -1,6 +1,6 @@
+var passportLocalMongoose = require('passport-local-mongoose');
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
     username: String,
@@ -23,6 +23,7 @@ User.methods.getName = function(){
 	return(this.firstname + ' ' + this.lastname);
 };
 
+//定义本地的passport存储
 User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);

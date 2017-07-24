@@ -61,8 +61,6 @@ app.use(function(req, res, next) {
     res.end('<html><body><h1>Hello World</h1></body></html>');
 });
 
-
-
 // error handlers
 // development error handler
 // will print stacktrace

@@ -2,6 +2,7 @@ var User = require('../models/user');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('../config.js');
 
+
 exports.getToken = function (user) {
     return jwt.sign(user, config.secretKey, {
         expiresIn: 3600
@@ -14,7 +15,7 @@ exports.verifyOrdinaryUser = function (req, res, next) {
 
     // decode token
     if (token) {
-        // verifies secret and checks exp
+        // verifies secret and checks exp, 通过token和secretKey
         jwt.verify(token, config.secretKey, function (err, decoded) {
             if (err) {
                 var err = new Error('You are not authenticated!');
@@ -22,6 +23,8 @@ exports.verifyOrdinaryUser = function (req, res, next) {
                 return next(err);
             } else {
                 // if everything is good, save to request for use in other routes
+       
+
                 req.decoded = decoded;
 
                 next();
